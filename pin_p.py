@@ -30,7 +30,8 @@ class Player(GameSprite):
             self.rect.y -= self.speed
         if keys_pressed[K_s] and self.rect.y < win_height - 100:
             self.rect.y += self.speed
-
+    def reset(self):
+        window.blit(self.image, (self.rect.x, self.rect.y))
 
  
  
@@ -44,7 +45,7 @@ clock = time.Clock()
 window.fill(background)
 
 player_one = Player('bamboo-stick.png', 20, win_height - 100, 50, 100, 10)
-player_two = Player('bamboo-stick.png', 20, win_height - 100, 50, 100, 10)
+player_two = Player('bamboo-stick.png', 630, win_height - 100, 50, 100, 10)
 
 game = True
 finish = False
@@ -64,8 +65,12 @@ while game:
                 player.fire()
     if finish != True:
          
-        player_one.update()
-        player_two.update()
+        player_one.update_one()
+        player_one.reset()
+        player_two.update_two()
+        player_two.reset()
+
+
 
 
     display.update()
